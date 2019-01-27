@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 
 class UserController extends Controller
@@ -131,7 +132,11 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::destroy($id);
-        return redirect()->back()->with('status', 'Администратор удален!');
+        if (Auth::id() == $id) {
+            return redirect()->back()->with('status', 'Нельзя удалить себя!');
+        } else {
+            User::destroy($id);
+            return redirect()->back()->with('status', 'Администратор удален!');
+        }
     }
 }

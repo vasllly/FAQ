@@ -35,6 +35,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <a class="nav-link" href="{{ route('users.index') }}">Администраторы</a>
+                        <a class="nav-link" href="{{ route('themes.index') }}">Темы</a>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
