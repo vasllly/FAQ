@@ -1,0 +1,40 @@
+table {
+    margin-top: 20px;
+}
+td, th {
+    padding: 10px;
+    border: 1px solid azure;
+    border-radius: 5px;
+}
+
+tr:nth-child(odd) {
+    background-color: aliceblue;
+}
+
+tr:nth-child(even) {
+    background-color: gainsboro;
+}
+
+button {
+    margin: 0px;
+}
+.alert {
+    color: red;
+}
+
+.button {
+    border: 1px solid #333; /* Рамка */
+    display: inline-block;
+    padding: 5px 15px; /* Поля */
+    text-decoration: none; /* Убираем подчёркивание */
+    background: linear-gradient(to bottom, white, gainsboro); /* Градиент */
+    color: #000; /* Цвет текста */
+}
+.button:hover {
+    box-shadow: 0 0 5px rgba(0,0,0,0.3); /* Тень */
+    color: #a00;
+}
+.balert {
+    background: linear-gradient(to bottom, red, lightcoral); /* Градиент */
+
+}
