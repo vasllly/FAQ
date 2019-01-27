@@ -15,8 +15,12 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('/login', 'Auth\LoginController@login');
-Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
+Route::namespace('Auth')->group(function () {
+    Route::get('/login', 'LoginController@showLoginForm')->name('login');
+    Route::post('/login', 'LoginController@login');
+    Route::post('/logout', 'LoginController@logout')->name('logout');
+});
 
-Route::get('/admin', 'Admin\HomeController@index')->name('admin.index');
+Route::middleware('auth')->namespace('Admin')->prefix('admin')->group(function () {
+    Route::get('/', 'HomeController@index')->name('admin.index');
+});
