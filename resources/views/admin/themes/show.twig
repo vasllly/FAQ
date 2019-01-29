@@ -36,6 +36,13 @@
                 <td>{{ question.created_at }}</td>
                 <td>{{ question.updated_at }}</td>
                 <td>{{ question.answer ? question.published ? 'Опубликован' : 'Скрыт' : 'Ожидает ответа' }}</td>
+                <td>
+                    <form action="{{ route('questions.destroy', [question.id]) }}" method="post">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                        <button type="submit" class="button balert">Удалить</button>
+                    </form>
+                </td>
             </tr>
             {% endfor %}
         </table>
