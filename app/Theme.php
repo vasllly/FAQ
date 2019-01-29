@@ -12,6 +12,6 @@ class Theme extends Model
 
     public function questions()
     {
-        return $this->hasMany('Question');
+        return $this->hasMany('App\Question');
     }
 }
