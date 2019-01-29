@@ -23,13 +23,13 @@
             </tr>
             {% for user in users %}
             <tr>
-                <td>{{ user['id'] }}</td>
-                <td>{{ user['login'] }}</td>
-                <td>{{ user['email'] }}</td>
-                <td><a  class="button" href="{{ route('users.show', [user['id']]) }}">Редактировать</a></td>
-                <td><a  class="button" href="{{ route('users.edit', [user['id']]) }}">Сменить пароль</a></td>
+                <td>{{ user.id }}</td>
+                <td>{{ user.login }}</td>
+                <td>{{ user.email }}</td>
+                <td><a  class="button" href="{{ route('users.show', [user.id]) }}">Редактировать</a></td>
+                <td><a  class="button" href="{{ route('users.edit', [user.id]) }}">Сменить пароль</a></td>
                 <td>
-                    <form action="{{ route('users.destroy', [user['id']]) }}" method="post">
+                    <form action="{{ route('users.destroy', [user.id]) }}" method="post">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
                         <button type="submit" class="button balert">Удалить</button>

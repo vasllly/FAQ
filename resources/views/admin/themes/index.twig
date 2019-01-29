@@ -19,14 +19,16 @@
             <tr>
                 <th>ID</th>
                 <th>Название темы</th>
+                <th>Количество вопросов</th>
             </tr>
             {% for theme in themes %}
             <tr>
-                <td>{{ theme['id'] }}</td>
-                <td>{{ theme['name'] }}</td>
-                <td><a  class="button" href="{{ route('themes.edit', [theme['id']]) }}">Редактировать</a></td>
+                <td>{{ theme.id }}</td>
+                <td>{{ theme.name }}</td>
+                <td>{{ theme.questions }}</td>
+                <td><a  class="button" href="{{ route('themes.edit', [theme.id]) }}">Редактировать</a></td>
                 <td>
-                    <form action="{{ route('themes.destroy', [theme['id']]) }}" method="post">
+                    <form action="{{ route('themes.destroy', [theme.id]) }}" method="post">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
                         <button type="submit" class="button balert">Удалить</button>
