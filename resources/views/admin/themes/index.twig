@@ -20,12 +20,32 @@
                 <th>ID</th>
                 <th>Название темы</th>
                 <th>Количество вопросов</th>
+                <th>Опупликовано</th>
+                <th>Без ответа</th>
             </tr>
             {% for theme in themes %}
             <tr>
                 <td>{{ theme.id }}</td>
                 <td>{{ theme.name }}</td>
-                <td>{{ theme.questions }}</td>
+                <td>{{ theme.questions|length }}</td>
+                <td>
+                    {% set count = 0 %}
+                    {% for question in theme.questions %}
+                        {% if question.published %}
+                            {% set count = count + 1 %}
+                        {% endif %}
+                    {% endfor %}
+                    {{ count }}
+                </td>
+                <td>
+                    {% set count = 0 %}
+                    {% for question in theme.questions %}
+                        {% if question.answer %}
+                            {% set count = count + 1 %}
+                        {% endif %}
+                    {% endfor %}
+                    {{ count }}
+                </td>
                 <td><a  class="button" href="{{ route('themes.edit', [theme.id]) }}">Редактировать</a></td>
                 <td>
                     <form action="{{ route('themes.destroy', [theme.id]) }}" method="post">
