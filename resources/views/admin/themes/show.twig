@@ -13,7 +13,6 @@
 
         <h1 class="col-md-9">Список вопросов по теме "{{ theme.name }}"</h1>
 
-        <a class="col-md-3 button" href="{{ route('themes.create') }}">Новая тема</a>
         {% if theme.questions[0] is defined %}
         <table class="col-md-12">
             <tr>
@@ -36,6 +35,7 @@
                 <td>{{ question.created_at }}</td>
                 <td>{{ question.updated_at }}</td>
                 <td>{{ question.answer ? question.published ? 'Опубликован' : 'Скрыт' : 'Ожидает ответа' }}</td>
+                <td>{% if question.answer %}<a class="button" href="{{ route('questions.show', [question.id]) }}">{{ question.published ? 'Скрыть' : 'Опубликовать' }}</a>{% endif %}</td>
                 <td>
                     <form action="{{ route('questions.destroy', [question.id]) }}" method="post">
                         {{ csrf_field() }}

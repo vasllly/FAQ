@@ -47,7 +47,11 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        //
+        $question = Question::find($id);
+        $question->published = !$question->published;
+        $question->save();
+
+        return redirect()->back()->with('status', 'Вопрос ' . ($question->published ? 'опубликован' : 'скрыт') . '!');
     }
 
     /**
