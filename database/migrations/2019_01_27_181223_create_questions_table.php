@@ -23,7 +23,7 @@ class CreateQuestionsTable extends Migration
             $table->boolean('published')->default(FALSE);
             $table->timestamps();
 
-            $table->foreign('theme_id')->references('id')->on('themes');
+            $table->foreign('theme_id')->references('id')->on('themes')->onDelete('cascade');
         });
     }
 
