@@ -26,7 +26,7 @@
             {% for theme in themes %}
             <tr>
                 <td>{{ theme.id }}</td>
-                <td>{{ theme.name }}</td>
+                <td><a href="{{ route('themes.show', [theme.id]) }}">{{ theme.name }}</a></td>
                 <td>{{ theme.questions|length }}</td>
                 <td>
                     {% set count = 0 %}
@@ -46,7 +46,7 @@
                     {% endfor %}
                     {{ count }}
                 </td>
-                <td><a  class="button" href="{{ route('themes.edit', [theme.id]) }}">Редактировать</a></td>
+                <td><a class="button" href="{{ route('themes.edit', [theme.id]) }}">Редактировать</a></td>
                 <td>
                     <form action="{{ route('themes.destroy', [theme.id]) }}" method="post">
                         {{ csrf_field() }}
@@ -58,7 +58,7 @@
             {% endfor %}
         </table>
         {% else %}
-        <p>Пока нет ни одной темы...</p>
+        <p>Пока нет ниодной темы...</p>
         {% endif %}
 
     </div>

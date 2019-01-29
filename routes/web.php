@@ -24,5 +24,5 @@ Route::namespace('Auth')->group(function () {
 Route::middleware('auth')->namespace('Admin')->prefix('admin')->group(function () {
     Route::get('/', 'HomeController@index')->name('admin.index');
     Route::resource('users', 'UserController');
-    Route::resource('themes', 'ThemeController', ['except' => ['show']]);
+    Route::resource('themes', 'ThemeController');
 });

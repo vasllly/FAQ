@@ -1,0 +1,48 @@
+{% extends "layouts.app" %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            {% if session('status') %}
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
+                </div>
+            {% endif %}
+        </div>
+
+        <h1 class="col-md-9">Список вопросов по теме "{{ theme.name }}"</h1>
+
+        <a class="col-md-3 button" href="{{ route('themes.create') }}">Новая тема</a>
+        {% if theme.questions[0] is defined %}
+        <table class="col-md-12">
+            <tr>
+                <th>ID</th>
+                <th>Вопрос</th>
+                <th>Ответ</th>
+                <th>Автор</th>
+                <th>Email автора</th>
+                <th>Создан</th>
+                <th>Отредактирован</th>
+                <th>Статус</th>
+            </tr>
+            {% for question in theme.questions %}
+            <tr>
+                <td>{{ question.id }}</td>
+                <td>{{ question.text }}</td>
+                <td>{{ question.answer }}</td>
+                <td>{{ question.author }}</td>
+                <td>{{ question.email }}</td>
+                <td>{{ question.created_at }}</td>
+                <td>{{ question.updated_at }}</td>
+                <td>{{ question.answer ? question.published ? 'Опубликован' : 'Скрыт' : 'Ожидает ответа' }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>Пока нет ниодного вопроса по данной теме...</p>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %}
