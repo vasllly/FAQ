@@ -16,7 +16,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.questions.index', ['questions' => Question::where('answer', NULL)->orderBy('created_at', 'desc')->get()]);
     }
 
     /**

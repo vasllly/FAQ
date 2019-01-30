@@ -25,6 +25,6 @@ Route::middleware('auth')->namespace('Admin')->prefix('admin')->group(function (
     Route::get('/', 'HomeController@index')->name('admin.index');
     Route::resource('users', 'UserController');
     Route::resource('themes', 'ThemeController');
-    Route::resource('questions', 'QuestionController');
+    Route::resource('questions', 'QuestionController', ['except' => ['create']]);
     Route::get('questions/{question}/answer', 'QuestionController@answer')->name('questions.answer');
 });

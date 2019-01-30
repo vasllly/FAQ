@@ -1,0 +1,60 @@
+{% extends "layouts.app" %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            {% if session('status') %}
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
+                </div>
+            {% endif %}
+        </div>
+
+        <h1 class="col-md-9">Список вопросов без ответа</h1>
+
+        {% if questions[0] is defined %}
+        <table class="col-md-12">
+            <tr>
+                <th>ID</th>
+                <th>Вопрос</th>
+                <th>Автор</th>
+                <th>Email автора</th>
+                <th>Создан</th>
+                <th>Отредактирован</th>
+                <th>Статус</th>
+            </tr>
+            {% for question in questions %}
+            <tr>
+                <td>{{ question.id }}</td>
+                <td>{{ question.text }}</td>
+                <td>{{ question.author }}</td>
+                <td>{{ question.email }}</td>
+                <td>{{ question.created_at }}</td>
+                <td>{{ question.updated_at }}</td>
+                <td>{{ question.answer ? question.published ? 'Опубликован' : 'Скрыт' : 'Ожидает ответа' }}</td>
+                <td>
+                    {% if question.answer %}
+                        <a class="button" href="{{ route('questions.show', [question.id]) }}">{{ question.published ? 'Скрыть' : 'Опубликовать' }}</a>
+                    {% else %}
+                        <a class="button" href="{{ route('questions.answer', [question.id]) }}">Ответить</a>
+                    {% endif %}
+                </td>
+                <td><a class="button" href="{{ route('questions.edit', [question.id]) }}">Редактировать</a></td>
+                <td>
+                    <form action="{{ route('questions.destroy', [question.id]) }}" method="post">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                        <button type="submit" class="button balert">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p class="col-md-9">Нет неотвеченных вопросов ;)</p>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %}
