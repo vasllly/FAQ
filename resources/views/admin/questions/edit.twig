@@ -1,0 +1,94 @@
+{% extends "layouts.app" %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Редактирование вопроса с id={{ question.id }}</div>
+
+                <div class="card-body">
+                    <form method="POST" action="{{ route('questions.update', question.id) }}">
+                        {{ csrf_field() }}
+                        {{ method_field('PATCH') }}
+
+                        <div class="form-group row">
+                            <label for="text" class="col-md-4 col-form-label text-md-right">Вопрос</label>
+
+                            <div class="col-md-6">
+                                <input id="text" type="text" class="form-control{{ errors.first('text') ? ' is-invalid' : '' }}" name="text" value="{{ old('text') ? old('text') : question.text }}" required autofocus>
+
+                                {% if errors.first('text') %}
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ errors.first('text') }}</strong>
+                                    </span>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="answer" class="col-md-4 col-form-label text-md-right">Ответ</label>
+
+                            <div class="col-md-6">
+                                <input id="answer" type="answer" class="form-control{{ errors.first('answer') ? ' is-invalid' : '' }}" name="answer" value="{{ old('answer') ? old('answer') : question.answer }}" required autofocus>
+
+                                {% if errors.first('answer') %}
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ errors.first('answer') }}</strong>
+                                    </span>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="author" class="col-md-4 col-form-label text-md-right">Автор</label>
+
+                            <div class="col-md-6">
+                                <input id="author" type="author" class="form-control{{ errors.first('author') ? ' is-invalid' : '' }}" name="author" value="{{ old('author') ? old('author') : question.author }}" required autofocus>
+
+                                {% if errors.first('author') %}
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ errors.first('author') }}</strong>
+                                    </span>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">Email автора</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control{{ errors.first('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') ? old('email') : question.email }}" required autofocus>
+
+                                {% if errors.first('email') %}
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ errors.first('email') }}</strong>
+                                    </span>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="theme" class="col-md-4 col-form-label text-md-right">Тема</label>
+
+                            <select id="theme" class="col-md-6 form-control" name="theme_id">
+                                {% for theme in themes %}
+                                    <option {{ question.theme.id == theme.id ? 'selected' : '' }} value="{{ theme.id }}">{{ theme.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Применить
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

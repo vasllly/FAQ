@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Question;
+use App\Theme;
 
 class QuestionController extends Controller
 {
@@ -62,7 +63,7 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.questions.edit', ['question' => Question::find($id), 'themes' => Theme::all()]);
     }
 
     /**
@@ -74,7 +75,22 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'text' => 'required|string|max:255',
+            'answer' => 'required|string',
+            'author' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+        ]);
+
+        Question::find($id)->update([
+            'text' => $request['text'],
+            'answer' => $request['answer'],
+            'author' => $request['author'],
+            'email' => $request['email'],
+            'theme_id' => $request['theme_id'],
+        ]);
+
+        return redirect()->route('themes.show', [$id => $request['theme_id']])->with('status', 'Вопрос с id=' . $id . ' изменен!');
     }
 
     /**
