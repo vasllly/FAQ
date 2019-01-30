@@ -35,7 +35,13 @@
                 <td>{{ question.created_at }}</td>
                 <td>{{ question.updated_at }}</td>
                 <td>{{ question.answer ? question.published ? 'Опубликован' : 'Скрыт' : 'Ожидает ответа' }}</td>
-                <td>{% if question.answer %}<a class="button" href="{{ route('questions.show', [question.id]) }}">{{ question.published ? 'Скрыть' : 'Опубликовать' }}</a>{% endif %}</td>
+                <td>
+                    {% if question.answer %}
+                        <a class="button" href="{{ route('questions.show', [question.id]) }}">{{ question.published ? 'Скрыть' : 'Опубликовать' }}</a>
+                    {% else %}
+                        <a class="button" href="{{ route('questions.answer', [question.id]) }}">Ответить</a>
+                    {% endif %}
+                </td>
                 <td><a class="button" href="{{ route('questions.edit', [question.id]) }}">Редактировать</a></td>
                 <td>
                     <form action="{{ route('questions.destroy', [question.id]) }}" method="post">

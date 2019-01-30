@@ -1,0 +1,48 @@
+{% extends "layouts.app" %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ question.text }}</div>
+
+                <div class="card-body">
+                    <form method="POST" action="{{ route('questions.store', question.id) }}">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="id" value="{{ question.id }}">
+
+                        <div class="form-group row">
+                            <label for="answer" class="col-md-4 col-form-label text-md-right">Ответ</label>
+
+                            <div class="col-md-6">
+                                <textarea class="form-control" id="answer" type="text" rows="9" name="answer" required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6 offset-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="published" id="published" {{ old('published') ? 'checked' : '' }}>
+
+                                    <label class="form-check-label" for="published">
+                                        Опубликовать
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Применить
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -37,7 +37,21 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'answer' => 'required|string',
+        ]);
+
+        $id = $request['id'];
+        $question = Question::find($id);
+
+        $question->answer = $request['answer'];
+
+        if ($request['published']) {
+            $question->published = TRUE;
+            $question->save();
+        }
+
+        return redirect()->route('themes.show', [$id => $question->theme->id])->with('status', 'Ответ на вопрос с id=' . $id . ' получен!');
     }
 
     /**
@@ -103,5 +117,10 @@ class QuestionController extends Controller
     {
         Question::destroy($id);
         return redirect()->back()->with('status', 'Вопрос удален!');
+    }
+
+    public function answer($id)
+    {
+        return view('admin.questions.answer', ['question' => Question::find($id)]);
     }
 }

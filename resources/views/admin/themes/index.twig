@@ -40,7 +40,7 @@
                 <td>
                     {% set count = 0 %}
                     {% for question in theme.questions %}
-                        {% if question.answer %}
+                        {% if not question.answer %}
                             {% set count = count + 1 %}
                         {% endif %}
                     {% endfor %}
