@@ -1,0 +1,39 @@
+{% extends "layouts.site" %}
+
+{% block content %}
+<section class="cd-faq">
+
+
+	<ul class="cd-faq-categories">
+		{% for theme, questions in all_questions %}
+		<li><a {{ loop.first ? 'class="selected" ' : '' }}href="#{{ theme|lower }}">{{ theme }}</a></li>
+		{% endfor %}
+	</ul> <!-- cd-faq-categories -->
+
+	<div class="cd-faq-items">
+		{% if session('status') %}
+			<div class="alert alert-success" role="alert">
+				{{ session('status') }}
+			</div>
+		{% endif %}
+		{% for theme, questions in all_questions %}
+		<ul id="{{ theme|lower }}" class="cd-faq-group">
+			<li class="cd-faq-title"><h2>{{ theme }}</h2></li>
+			{% for question in questions %}
+			<li>
+				<a class="cd-faq-trigger" href="#0">{{ question.text }}</a>
+				<div class="cd-faq-content">
+					<p>{{ question.answer }}</p>
+				</div> <!-- cd-faq-content -->
+			</li>
+
+			{% endfor %}
+		</ul> <!-- cd-faq-group -->
+
+		{% endfor %}
+
+		<a class="button" href="{{ route('create') }}">Задать вопрос</a>
+	</div> <!-- cd-faq-items -->
+	<a href="#0" class="cd-close-panel">Close</a>
+</section> <!-- cd-faq -->
+{% endblock %}

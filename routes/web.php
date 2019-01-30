@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'IndexController@index');
+Route::resource('/', 'HomeController', ['only' => ['index', 'create', 'store']]);
 
 Route::namespace('Auth')->group(function () {
     Route::get('/login', 'LoginController@showLoginForm')->name('login');
