@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', 'IndexController@index');
 
 Route::namespace('Auth')->group(function () {
     Route::get('/login', 'LoginController@showLoginForm')->name('login');
